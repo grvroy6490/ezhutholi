@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "502485495614",
+    "project_id": "eluthozhi",
+    "storage_bucket": "eluthozhi.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502485495614:android:f6b990b774bc5ed469c66f",
+        "android_client_info": {
+          "package_name": "com.copees.eluthozhi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502485495614-fah131ftd701nhfsh3sd7ldl3aalc6g6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpL2tDg_GYb17-dxYIpA8uVLqdOVQPsnM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502485495614-fah131ftd701nhfsh3sd7ldl3aalc6g6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "502485495614-a5ba8k8igif6rl5fb6q5ejqir97p110q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.ezhutholi"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502485495614:android:89dde4f586b2fc2169c66f",
+        "android_client_info": {
+          "package_name": "com.mycompany.ezhutholi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502485495614-abfvhkt0gle921mp2jdfall61jj5d4ig.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.ezhutholi",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "502485495614-fah131ftd701nhfsh3sd7ldl3aalc6g6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpL2tDg_GYb17-dxYIpA8uVLqdOVQPsnM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502485495614-fah131ftd701nhfsh3sd7ldl3aalc6g6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "502485495614-a5ba8k8igif6rl5fb6q5ejqir97p110q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.ezhutholi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,600 @@
+{
+    "data": [
+        {
+            "title": "உயிர் எழுத்துகள்",
+            "eng_title": "Uyir Ezhuthukal - Vowel Letters",
+            "items": [
+                {
+                    "subTitle":null,
+                    "engTitle": null,
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems" :[
+                        {"name": "அ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஆ", "english": "", "sound": "aa.wav", "column": 1},
+                        {"name": "இ", "english": "", "sound": "i.wav", "column": 1},
+                        {"name": "ஈ", "english": "", "sound": "ii.wav", "column": 1},
+                        {"name": "உ", "english": "", "sound": "u.wav", "column": 1},
+                        {"name": "ஊ", "english": "", "sound": "uu.wav", "column": 1},
+                        {"name": "எ", "english": "", "sound": "e.wav", "column": 1},
+                        {"name": "ஏ", "english": "", "sound": "ee.wav", "column": 1},
+                        {"name": "ஐ", "english": "", "sound": "ai.wav", "column": 1},
+                        {"name": "ஒ", "english": "", "sound": "o.wav", "column": 1},
+                        {"name": "ஓ", "english": "", "sound": "oo.wav", "column": 1},
+                        {"name": "ஔ", "english": "", "sound": "au.wav", "column": 2}
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "ஆய்த எழுத்து",
+            "eng_title": "Ayutha Ezhuthu - Special Characters",
+            "items": [
+                {
+                    "subTitle": null,
+                    "engTitle": null,
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems": [
+                        {"name": "ஃ", "english": "", "sound": "a.wav", "column": 1}
+                    ]
+                }
+
+            ]
+        },
+      
+        {
+            "title": "மெய் எழுத்துகள்",
+            "eng_title": "Mei Ezhuthukal - Consonant Letters",
+            "items": [
+                {
+                    "subTitle": null,
+                    "engTitle": null,
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems": [
+                        {"name": "க்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ங்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ச்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஞ்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ட்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ண்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "த்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ந்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ப்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ம்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ய்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ர்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ல்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "வ்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ழ்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ள்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ற்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ன்", "english": "", "sound": "a.wav", "column": 1}
+                    ]
+                }
+            ]
+        },
+
+        {
+            "title": "உயிர் மெய் எழுத்துகள்",
+            "eng_title": "Uyirmei Ezhuthukal - Compound Letters (Consonant-Vowel Combinations)",
+            "items": [
+                {
+                    "subTitle": "க வரிசை",
+                    "engTitle": "Ka row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems" : [
+                        {"name": "க", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "கா", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "கி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "கீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "கு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "கூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "கெ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "கே", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "கை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "கொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "கோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "கௌ", "english": "", "sound": "a.wav", "column": 2}
+                        
+                    ]
+                },
+
+                {
+                    "subTitle": "ங வரிசை",
+                    "engTitle": "Gna row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems": [
+                        {"name": "ங", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஙா", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஙி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஙீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஙு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஙூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஙெ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஙே", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஙை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஙொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஙோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஙௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ச வரிசை",
+                    "engTitle": "Sa row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems": [
+                        {"name": "ச", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "சா", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "சி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "சீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "சு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "சூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "செ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "சே", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "சை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "சொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "சோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "சௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ஞ வரிசை",
+                    "engTitle": "nya row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems": [
+                        {"name": "ஞ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஞா", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஞி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஞீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஞு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஞூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஞெ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஞே", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஞை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஞொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஞோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஞௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ட வரிசை",
+                    "engTitle": "da row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems": [
+                        {"name": "ட", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "டா", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "டி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "டீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "டு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "டூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "டெ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "டே", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "டை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "டொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "டோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "டௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ண வரிசை",
+                    "engTitle": "Na row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems": [
+                        {"name": "ண", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ணா", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ணி", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ணீ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ணு", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ணூ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ணெ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ணே", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ணை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ணொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ணோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ணௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "த வரிசை",
+                    "engTitle": "Tha row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems": [
+                        {"name": "த", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "தா", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "தி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "தீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "து", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "தூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "தெ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "தே", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "தை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "தொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "தோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "தௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ந வரிசை",
+                    "engTitle": "Na row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems": [
+                        {"name": "ந", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "நா", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "நி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "நீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "நு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "நூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "நெ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "நே", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "நை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "நொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "நோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "நௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ப வரிசை",
+                    "engTitle": "Pa row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems": [
+                        {"name": "ப", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "பா", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "பி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "பீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "பு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "பூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "பெ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "பே", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "பை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "பொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "போ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "பௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ம வரிசை",
+                    "engTitle": "Ma row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems": [
+                        {"name": "ம", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "மா", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "மி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "மீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "மு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "மூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "மெ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "மே", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "மை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "மொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "மோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "மௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ய வரிசை",
+                    "engTitle": "Ya row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems": [
+                        {"name": "ய", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "யா", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "யி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "யீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "யு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "யூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "யெ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "யே", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "யை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "யொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "யோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "யௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ர வரிசை",
+                    "engTitle": "Ra row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems": [
+                        {"name": "ர", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ரா", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ரி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ரீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ரு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ரூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ரெ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ரே", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ரை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ரொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ரோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ரௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ல வரிசை",
+                    "engTitle": "La row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems":[
+                        {"name": "ல", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "லா", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "லி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "லீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "லு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "லூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "லெ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "லே", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "லை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "லொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "லோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "லௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "வ வரிசை",
+                    "engTitle": "Va row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems":[
+                        {"name": "வ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "வா", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "வி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "வீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "வு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "வூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "வெ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "வே", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "வை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "வொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "வோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "வௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ழ வரிசை",
+                    "engTitle": "Zha row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems":[
+                        {"name": "ழ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ழா", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ழி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ழீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ழு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ழூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ழெ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ழே", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ழை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ழொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ழோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ழௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ள வரிசை",
+                    "engTitle": "La row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems": [
+                        {"name": "ள", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ளா", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ளி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ளீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ளு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ளூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ளெ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ளே", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ளை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ளொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ளோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ளௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ற வரிசை",
+                    "engTitle": "Ra row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems":[
+                        {"name": "ற", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "றா", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "றி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "றீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "று", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "றூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "றெ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "றே", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "றை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "றொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "றோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "றௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ன வரிசை",
+                    "engTitle": "nna row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems":[
+                        {"name": "ன", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "னா", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "னி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "னீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "னு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "னூ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "னெ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "னே", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "னை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "னொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "னோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "னௌ", "english": "", "sound": "a.wav", "column": 2}  
+                    ]   
+                }  
+            ]  
+        },
+        {
+            "title": "கிரந்த எழுத்துக்கள்",
+            "eng_title": "Grantha Ezhuthukal – Grantha Letters (Characters from Grantha script)",
+            "items": [
+                {
+                    "subTitle": null,
+                    "engTitle": null,
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems":[
+                        {"name": "ஜ்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஷ்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஸ்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஹ்", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "க்ஷ்", "english": "",  "sound": "a.wav", "column": 2},
+                        {"name": "ஸ்ரீ", "english": "",  "sound": "a.wav", "column": 2}
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "கிரந்த கூட்டெழுத்துக்கள்",
+            "eng_title": "Uyir Ezhuthukkal (Vowels)",
+            "items": [
+                {
+                    "subTitle": "ஜ வரிசை",
+                    "engTitle": "Ja row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems":[
+                        {"name": "ஜ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஜா", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஜி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஜி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஜு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஜூ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஜெ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஜே", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஜை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஜொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஜோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஜௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ஷ வரிசை",
+                    "engTitle": "Sha row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems":[
+                        {"name": "ஷ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஷா", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஷி", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஷீ", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஷு", "english": "", "sound": "a.wav", "column": 1},
+                        {"name": "ஷூ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஷெ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஷே", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஷை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஷொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஷோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஷௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ஸ வரிசை",
+                    "engTitle": "Ssha row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems":[
+                        {"name": "ஸ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஸா", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஸி", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஸீ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஸு", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஸூ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஸூ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஸே", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஸை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஸொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஸோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஸௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "ஹ வரிசை",
+                    "engTitle": "Ha row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems":[
+                        {"name": "ஹ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஹா", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஹி", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஹீ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஹு", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஹூ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஹெ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஹே", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஹை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஹொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஹோ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "ஹௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                },
+                {
+                    "subTitle": "க்ஷ வரிசை",
+                    "engTitle": "Shsha row",
+                    "textColor": "#BE003B",
+                    "borderColor": "#FFDADB",
+                    "backgroundColor": "#FFDADB",
+                    "subItems":[
+                        {"name": "க்ஷ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "க்ஷா", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "க்ஷி", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "க்ஷீ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "க்ஷு", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "க்ஷூ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "க்ஷெ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "க்ஷே", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "க்ஷை", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "க்ஷொ", "english": "", "sound": "a.wav", "column": 2},
+                        {"name": "க்ஷௌ", "english": "", "sound": "a.wav", "column": 2}
+                    ]
+                }
+            ]
+        }
+    ]
+}
