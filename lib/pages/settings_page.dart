@@ -1,8 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eluthozhi_v3/providers/login_state_provider.dart';
 import 'package:eluthozhi_v3/providers/theme_provider.dart';
 import 'package:eluthozhi_v3/theme/theme_manager.dart';
+import 'package:eluthozhi_v3/utility/screenUtility.dart';
 import 'package:eluthozhi_v3/widgets/accordian_card.dart';
+import 'package:eluthozhi_v3/widgets/bottom_nav_bar.dart';
 import 'package:eluthozhi_v3/widgets/custom_theme_switch.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,10 +20,28 @@ class SettingPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingPage> {
   bool isDarkModeEnabled = false; // Initialize the toggle switch state
 
+  Future<void> _handleLogout() async {
+    await FirebaseAuth.instance.signOut();
+    await ScreenUtils.clearSharedPreferences();
+    Provider.of<LoginStateProvider>(context, listen: false).logOut();
+    if (mounted) {
+      Navigator.pushReplacementNamed(context, '/Login');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final loginState = Provider.of<LoginStateProvider>(context);
+    final user = loginState.user;
+
+    String displayName = user?.displayName ?? 'Anonymous User';
+    String email = user?.email ?? 'No Email';
+
     return Scaffold(
       backgroundColor: getFigmaColor(context, 'Primary', 'On Main'),
+      bottomNavigationBar: BottomNavBar(
+        currentRoute: ModalRoute.of(context)!.settings.name ?? '',
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -61,14 +83,14 @@ class _SettingsPageState extends State<SettingPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Syed Shahab',
+                            displayName,
                             style: AppTypography.titleLarge().copyWith(
                               fontWeight: FontWeight.w400,
                               color: getFigmaColor(context, 'Primary', 'Dark'),
                             ),
                           ),
                           Text(
-                            'Email address',
+                            email,
                             style: AppTypography.labelMedium().copyWith(
                               color: getFigmaColor(context, 'Primary', 'Dark'),
                             ),
@@ -79,17 +101,15 @@ class _SettingsPageState extends State<SettingPage> {
                     PopupMenuButton<String>(
                       icon: Icon(Icons.more_vert),
                       onSelected: (String value) {
-                        // Handle the selected value
+                        if (value == 'Logout') {
+                          _handleLogout();
+                        }
                       },
                       itemBuilder: (BuildContext context) {
                         return [
                           PopupMenuItem<String>(
-                            value: 'Option 1',
-                            child: Text('Option 1'),
-                          ),
-                          PopupMenuItem<String>(
-                            value: 'Option 2',
-                            child: Text('Option 2'),
+                            value: 'Logout',
+                            child: Text('Logout'),
                           ),
                         ];
                       },
@@ -149,32 +169,32 @@ class ToggleCard extends StatelessWidget {
               ),
             ),
             Container(
-              decoration: BoxDecoration(
-                color: getFigmaColor(context, 'Surface', 'Surface Container'),
-                border: Border.all(
-                  color: getFigmaColor(
-                    context,
-                    'Background',
-                    'Light Border',
-                  ), // Changed to a contrasting color
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(30)),
-              ),
+              // decoration: BoxDecoration(
+              //   color: getFigmaColor(context, 'Surface', 'Surface Container'),
+              //   border: Border.all(
+              //     color: getFigmaColor(
+              //       context,
+              //       'Background',
+              //       'Light Border',
+              //     ), // Changed to a contrasting color
+              //     width: 1,
+              //   ),
+              //   borderRadius: BorderRadius.all(Radius.circular(30)),
+              // ),
               padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Light',
-                    style: AppTypography.labelSmall().copyWith(
-                      color:
-                          themeProvider.isDark
-                              ? getFigmaColor(context, 'Text', 'Disabled')
-                              : getFigmaColor(context, 'Text', 'Primary'),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  // Text(
+                  //   'Light',
+                  //   style: AppTypography.labelSmall().copyWith(
+                  //     color:
+                  //         themeProvider.isDark
+                  //             ? getFigmaColor(context, 'Text', 'Disabled')
+                  //             : getFigmaColor(context, 'Text', 'Primary'),
+                  //     fontWeight: FontWeight.w600,
+                  //   ),
+                  // ),
                   SizedBox(width: 10),
                   CustomThemeSwitch(
                     isDark: themeProvider.isDark,
@@ -183,16 +203,16 @@ class ToggleCard extends StatelessWidget {
                     },
                   ),
                   SizedBox(width: 10),
-                  Text(
-                    'Dark',
-                    style: AppTypography.labelSmall().copyWith(
-                      color:
-                          themeProvider.isDark
-                              ? getFigmaColor(context, 'Text', 'Primary')
-                              : getFigmaColor(context, 'Text', 'Disabled'),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  // Text(
+                  //   'Dark',
+                  //   style: AppTypography.labelSmall().copyWith(
+                  //     color:
+                  //         themeProvider.isDark
+                  //             ? getFigmaColor(context, 'Text', 'Primary')
+                  //             : getFigmaColor(context, 'Text', 'Disabled'),
+                  //     fontWeight: FontWeight.w600,
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -337,7 +357,7 @@ class FilterCard extends StatefulWidget {
 
 class _StateFilterCard extends State<FilterCard> {
   int selectedRadioValue = 1; // Initialize to the first radio button's value
-  
+
   @override
   Widget build(BuildContext context) {
     return AccordionCard(
@@ -351,7 +371,14 @@ class _StateFilterCard extends State<FilterCard> {
                 Row(
                   children: [
                     Radio<int>(
-                      fillColor: selectedRadioValue == 1 ? WidgetStateProperty.all(getFigmaColor(context, 'Primary', 'Main')) : WidgetStateProperty.all(Color.fromARGB(255, 31, 31, 31)),
+                      fillColor:
+                          selectedRadioValue == 1
+                              ? WidgetStateProperty.all(
+                                getFigmaColor(context, 'Primary', 'Main'),
+                              )
+                              : WidgetStateProperty.all(
+                                Color.fromARGB(255, 31, 31, 31),
+                              ),
                       value: 1, // Unique value for this radio button
                       groupValue: selectedRadioValue,
                       onChanged: (int? value) {
@@ -377,8 +404,15 @@ class _StateFilterCard extends State<FilterCard> {
               children: [
                 Row(
                   children: [
-                    Radio<int>(                      
-                      fillColor: selectedRadioValue != 1 ? WidgetStateProperty.all(getFigmaColor(context, 'Primary', 'Main')) : WidgetStateProperty.all(Color.fromARGB(255, 31, 31, 31)),
+                    Radio<int>(
+                      fillColor:
+                          selectedRadioValue != 1
+                              ? WidgetStateProperty.all(
+                                getFigmaColor(context, 'Primary', 'Main'),
+                              )
+                              : WidgetStateProperty.all(
+                                Color.fromARGB(255, 31, 31, 31),
+                              ),
                       value: 2, // Unique value for this radio button
                       groupValue: selectedRadioValue,
                       onChanged: (int? value) {

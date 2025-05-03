@@ -1,5 +1,6 @@
 import 'package:eluthozhi_v3/providers/theme_provider.dart';
 import 'package:eluthozhi_v3/theme/theme_manager.dart';
+import 'package:eluthozhi_v3/utility/screenUtility.dart';
 import 'package:eluthozhi_v3/widgets/auth_form_header.dart';
 import 'package:eluthozhi_v3/widgets/custom_buttons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,11 +24,45 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
   final FirebaseAuthService _authService = FirebaseAuthService();
 
+  bool _rememberMe = false;
+  bool _obscurePassword = true;
+
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // final keyboardSpace = MediaQuery.of(context).viewInsets.bottom / 2;
+    return Scaffold(
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset('assets/images/auth_bg.png', fit: BoxFit.cover),
+          SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: ScreenUtils.height(context, 0.2),
+                  child: AuthLogoHeader(),
+                ),
+                const SizedBox(height: 10),
+                Expanded(
+                  child: SizedBox(
+                    width: double.maxFinite,
+                    child: _buildLoginForm(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildInputField(String hint, bool isPassword) {
@@ -51,13 +86,17 @@ class _LoginPageState extends State<LoginPage> {
           Expanded(
             child: TextFormField(
               controller: isPassword ? _passwordController : _emailController,
-              obscureText: isPassword,
+              obscureText: isPassword ? _obscurePassword : false,
               decoration: InputDecoration(
                 hintText: hint,
                 border: InputBorder.none,
               ),
-              keyboardType: isPassword ? TextInputType.text : TextInputType.emailAddress,
-              textCapitalization: isPassword? TextCapitalization.none : TextCapitalization.none,
+              keyboardType:
+                  isPassword ? TextInputType.text : TextInputType.emailAddress,
+              textCapitalization:
+                  isPassword
+                      ? TextCapitalization.none
+                      : TextCapitalization.none,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your $hint';
@@ -73,38 +112,15 @@ class _LoginPageState extends State<LoginPage> {
           if (isPassword)
             IconButton(
               icon: Icon(
-                Icons.remove_red_eye,
+                _obscurePassword ? Icons.visibility_off : Icons.visibility,
                 color: getFigmaColor(context, 'Schemes', 'On Surface Variant'),
               ),
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  _obscurePassword = !_obscurePassword;
+                });
+              },
             ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Image.asset('assets/images/auth_bg.png', fit: BoxFit.cover),
-          SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 50),
-                const AuthLogoHeader(),
-                const SizedBox(height: 10),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 0),
-                  child: _buildLoginForm(),
-                ),
-              ],
-            ),
-          ),
         ],
       ),
     );
@@ -125,43 +141,75 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             _buildFormHeader(),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    const SizedBox(height: 20),
-                    _buildInputField('Email Address', false),
-                    const SizedBox(height: 20),
-                    _buildInputField('Password', true),
-                    const SizedBox(height: 10),
-                    _buildRememberRow(),
-                    const SizedBox(height: 25),
-                    CustomSubmitButton(onPressed: _handleLogin, text: 'Log in'),
-                    const SizedBox(height: 15),
-                    Text(
-                      'Or',
-                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                        color:
-                            Provider.of<ThemeProvider>(context).isDark
-                                ? Colors.white
-                                : Colors.black,
-                      ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        _buildInputField('Email Address', false),
+                        const SizedBox(height: 20),
+                        _buildInputField('Password', true),
+                        const SizedBox(height: 10),
+                        _buildRememberRow(),
+                        const SizedBox(height: 25),
+                        CustomSubmitButton(
+                          onPressed: _handleLogin,
+                          text: 'Log in',
+                        ),
+                        const SizedBox(height: 15),
+                        Text(
+                          'Or',
+                          style: Theme.of(
+                            context,
+                          ).textTheme.labelLarge!.copyWith(
+                            color:
+                                Provider.of<ThemeProvider>(context).isDark
+                                    ? Colors.white
+                                    : Colors.black,
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        SocialLoginButton(
+                          onPressed: () async {
+                            User? user = await _authService.signInWithGoogle();
+                            if (user != null) {
+                              if (mounted) {
+                                Provider.of<LoginStateProvider>(
+                                  context,
+                                  listen: false,
+                                ).logIn(user);
+                                Navigator.pushReplacementNamed(
+                                  context,
+                                  '/Home',
+                                );
+                              }
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Something is wrong, please try again later',
+                                  ),
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            }
+                          },
+                          text: 'Continue with Google',
+                          icon: SvgPicture.asset(
+                            'assets/images/google.svg', // Path to your SVG asset
+                            width: 18.0, // Adjust width as needed
+                            height: 18.0, // Adjust height as needed
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        _buildSignupRow(),
+                      ],
                     ),
-                    const SizedBox(height: 15),
-                    SocialLoginButton(
-                      onPressed: () {},
-                      text: 'Continue with Google',
-                      icon: SvgPicture.asset(
-                        'assets/images/google.svg', // Path to your SVG asset
-                        width: 18.0, // Adjust width as needed
-                        height: 18.0, // Adjust height as needed
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    _buildSignupRow(),
-                  ],
+                  ),
                 ),
               ),
             ),
@@ -215,8 +263,12 @@ class _LoginPageState extends State<LoginPage> {
     return Row(
       children: [
         Checkbox(
-          value: false,
-          onChanged: (val) {},
+          value: _rememberMe,
+          onChanged: (val) {
+            setState(() {
+              _rememberMe = val ?? false;
+            });
+          },
           checkColor: getFigmaColor(context, 'Grey', 'Grey'),
           activeColor: getFigmaColor(context, 'Primary', 'Main'),
           visualDensity: VisualDensity.compact,
@@ -289,11 +341,16 @@ class _LoginPageState extends State<LoginPage> {
       );
       if (user != null) {
         if (mounted) {
-          Provider.of<LoginStateProvider>(context, listen: false).logIn();
+          Provider.of<LoginStateProvider>(context, listen: false).logIn(user);
           Navigator.pushReplacementNamed(context, '/Home');
         }
       } else {
-        // Show error message
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Something is wrong, please try again later'),
+            duration: Duration(seconds: 2),
+          ),
+        );
       }
     }
   }

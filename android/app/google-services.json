@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "502485495614-70vugv66a9p91um7j2678ceuk67m7r2v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.copees.eluthozhi",
+            "certificate_hash": "9a01c72a63bc6d764317ec42a8d0277dbae5f407"
+          }
+        },
+        {
           "client_id": "502485495614-fah131ftd701nhfsh3sd7ldl3aalc6g6.apps.googleusercontent.com",
           "client_type": 3
         }

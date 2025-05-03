@@ -1,3 +1,4 @@
+import 'package:eluthozhi_v3/theme/button_palettes.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,8 +22,10 @@ class ThemeProvider with ChangeNotifier {
 
   void toggleTheme() async {
     _themeMode = isDark ? ThemeMode.light : ThemeMode.dark;
-    notifyListeners();
+    // ⚡ Force regenerate palettes immediately
     final prefs = await SharedPreferences.getInstance();
     prefs.setInt('themeMode', _themeMode.index);
+    ThemedButtonPalettes.refreshPalettes(isDark);
+    notifyListeners();
   }
 }

@@ -146,22 +146,32 @@ ThemeData getTheme(bool isDark) {
   );
 }
 
-
 Color hexToColor(String hex, {double? alpha}) {
   hex = hex.replaceAll('#', '');
 
-  if (hex.length == 6) {
-    hex = 'FF$hex'; // full opacity
-  } else if (hex.length == 8) {
-    // Convert RGBA → ARGB
-    hex = hex.substring(6, 8) + hex.substring(0, 6);
-  } else {
-    throw FormatException('Hex color must be 6 or 8 characters');
+  // Handle short hex (RGB)
+  if (hex.length == 3) {
+    hex = hex.split('').map((c) => '$c$c').join(); // "abc" -> "aabbcc"
+    hex = 'FF$hex'; // add full opacity
+  }
+  
+  // Handle 6-digit hex (RRGGBB)
+  else if (hex.length == 6) {
+    hex = 'FF$hex'; // add full opacity
+  }
+  
+  // Handle 8-digit hex (RRGGBBAA)
+  else if (hex.length == 8) {
+    hex = hex.substring(6, 8) + hex.substring(0, 6); // RGBA → ARGB
+  } 
+  
+  else {
+    throw FormatException('Hex color must be 3, 6 or 8 characters long');
   }
 
   int colorInt = int.parse(hex, radix: 16);
 
-  // Apply alpha override if provided
+  // Override alpha if provided
   if (alpha != null) {
     int alphaInt = (alpha * 255).round().clamp(0, 255);
     colorInt = (alphaInt << 24) | (colorInt & 0x00FFFFFF);
@@ -173,11 +183,47 @@ Color hexToColor(String hex, {double? alpha}) {
 
 
 
+
 Color getFigmaColor(BuildContext context, String group, String key) {
   final isDark = Theme.of(context).brightness == Brightness.dark;
   final scheme = isDark ? completeColorScheme.dark : completeColorScheme.light;
 
   final hex = scheme[group]?[key];
+  if (hex is String) {
+    return hexToColor(hex);
+  }
+  return Colors.transparent;
+}
+
+Color getFigmaColorThreeLevel(BuildContext context, String group, String subgroup, String key) {
+  final isDark = Theme.of(context).brightness == Brightness.dark;
+  final scheme = isDark ? completeColorScheme.dark : completeColorScheme.light;
+
+  final hex = scheme[group]?[subgroup]?[key];
+  if (hex is String) {
+    return hexToColor(hex);
+  }
+  return Colors.transparent;
+}
+
+
+
+Color getFigmaColorDirect(bool isDark, String group, String key) {
+  final scheme = isDark ? completeColorScheme.dark : completeColorScheme.light;
+
+  final hex = scheme[group]?[key];
+  if (hex is String) {
+    return hexToColor(hex);
+  }
+  return Colors.transparent;
+}
+
+
+
+Color getFigmaColorThreeLevelDirect(bool isDark, String group, String subgroup, String key) {
+  final scheme = isDark ? completeColorScheme.dark : completeColorScheme.light;
+
+  final hex = scheme[group]?[subgroup]?[key];
   if (hex is String) {
     return hexToColor(hex);
   }

@@ -1,5 +1,8 @@
+import 'package:eluthozhi_v3/providers/login_state_provider.dart';
 import 'package:eluthozhi_v3/providers/theme_provider.dart';
+import 'package:eluthozhi_v3/services/firebase_auth_service.dart';
 import 'package:eluthozhi_v3/theme/theme_manager.dart';
+import 'package:eluthozhi_v3/utility/screenUtility.dart';
 import 'package:eluthozhi_v3/widgets/auth_form_header.dart';
 import 'package:eluthozhi_v3/widgets/custom_buttons.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +19,10 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
-
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final FirebaseAuthService _authService = FirebaseAuthService();
 
   bool _rememberMe = false;
   bool _obscurePassword = true;
@@ -43,26 +46,15 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 50),
-                const AuthLogoHeader(),
-                const SizedBox(height: 30),
+                SizedBox(
+                  height: ScreenUtils.height(context, 0.2),
+                  child: AuthLogoHeader(),
+                ),
+                const SizedBox(height: 10),
                 Expanded(
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      return SingleChildScrollView(
-                        padding: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).viewInsets.bottom + 20,
-                        ),
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            minHeight: constraints.maxHeight,
-                          ),
-                          child: IntrinsicHeight(
-                            child: _buildLoginForm(),
-                          ),
-                        ),
-                      );
-                    },
+                  child: SizedBox(
+                    width: double.maxFinite,
+                    child: _buildLoginForm(),
                   ),
                 ),
               ],
@@ -83,55 +75,84 @@ class _SignUpPageState extends State<SignUpPage> {
           topRight: Radius.circular(15),
         ),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildFormHeader(),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  _buildInputField('Name', _nameController, false),
-                  const SizedBox(height: 20),
-                  _buildInputField('Email', _emailController, false),
-                  const SizedBox(height: 20),
-                  _buildInputField('Password', _passwordController, true),
-                  const SizedBox(height: 10),
-                  _buildRememberRow(),
-                  const SizedBox(height: 25),
-                  CustomSubmitButton(
-                    onPressed: _handleSignup,
-                    text: 'Signup',
-                  ),
-                  const SizedBox(height: 15),
-                  Text(
-                    'Or',
-                    style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                          color: Provider.of<ThemeProvider>(context).isDark
-                              ? Colors.white
-                              : Colors.black,
+      child: IntrinsicHeight(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildFormHeader(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        _buildInputField('Name', _nameController, false),
+                        const SizedBox(height: 20),
+                        _buildInputField('Email Address', _emailController, false),
+                        const SizedBox(height: 20),
+                        _buildInputField('Password', _passwordController, true),
+                        const SizedBox(height: 10),
+                        _buildRememberRow(),
+                        const SizedBox(height: 25),
+                        CustomSubmitButton(
+                          onPressed: _handleSignup,
+                          text: 'Signup',
                         ),
-                  ),
-                  const SizedBox(height: 15),
-                  SocialLoginButton(
-                    onPressed: () {},
-                    text: 'Continue with Google',
-                    icon: SvgPicture.asset(
-                      'assets/images/google.svg',
-                      width: 18.0,
-                      height: 18.0,
+                        const SizedBox(height: 15),
+                        Text(
+                          'Or',
+                          style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                                color: Provider.of<ThemeProvider>(context).isDark
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                        ),
+                        const SizedBox(height: 15),
+                        SocialLoginButton(
+                          onPressed: () async {
+                            User? user = await _authService.signInWithGoogle();
+                            if (user != null) {
+                              if (mounted) {
+                                Provider.of<LoginStateProvider>(
+                                  context,
+                                  listen: false,
+                                ).logIn(user);
+                                Navigator.pushReplacementNamed(
+                                  context,
+                                  '/Home',
+                                );
+                              }
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Something is wrong, please try again later',
+                                  ),
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            }
+                          },
+                          text: 'Continue with Google',
+                          icon: SvgPicture.asset(
+                            'assets/images/google.svg',
+                            width: 18.0,
+                            height: 18.0,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        _buildSignupRow(),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  _buildSignupRow(),
-                ],
+                ),
               ),
-            ),
-          ),
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -176,8 +197,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _buildInputField(
-      String hint, TextEditingController controller, bool isPassword) {
+  Widget _buildInputField(String hint, TextEditingController controller, bool isPassword) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
       decoration: BoxDecoration(
@@ -203,23 +223,21 @@ class _SignUpPageState extends State<SignUpPage> {
                 hintText: hint,
                 border: InputBorder.none,
               ),
+              keyboardType: isPassword ? TextInputType.text : TextInputType.emailAddress,
+              textCapitalization: TextCapitalization.none,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return '$hint cannot be empty';
                 }
-
-                if (hint == 'Email') {
-                  final emailRegex =
-                      RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                if (hint.contains('Email')) {
+                  final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$');
                   if (!emailRegex.hasMatch(value)) {
                     return 'Enter a valid email address';
                   }
                 }
-
                 if (isPassword && value.length < 6) {
                   return 'Password must be at least 6 characters';
                 }
-
                 return null;
               },
             ),
@@ -313,6 +331,11 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
+  Future<bool> _isEmailAlreadyRegistered(String email) async {
+    final methods = await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
+    return methods.isNotEmpty;
+  }
+
   Future<void> _handleSignup() async {
     if (_formKey.currentState!.validate()) {
       final name = _nameController.text.trim();
@@ -322,36 +345,56 @@ class _SignUpPageState extends State<SignUpPage> {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Creating account...')),
+        const SnackBar(content: Text('Checking email availability...')),
       );
 
       try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: email,
-          password: password,
+        final alreadyRegistered = await _isEmailAlreadyRegistered(email);
+
+        if (alreadyRegistered) {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('This email is already registered.')),
+          );
+          return;
+        }
+
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Creating account...')),
         );
+
+        await _authService.signUpWithEmailAndPassword(email, password);
 
         if (!mounted) return;
 
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
         Navigator.pushReplacementNamed(context, '/Home');
       } on FirebaseAuthException catch (e) {
         if (!mounted) return;
 
-        String errorMsg = 'Something went wrong';
-        if (e.code == 'email-already-in-use') {
-          errorMsg = 'This email is already registered.';
-        } else if (e.code == 'weak-password') {
-          errorMsg = 'Password should be at least 6 characters.';
-        } else if (e.code == 'invalid-email') {
-          errorMsg = 'Invalid email address.';
+        debugPrint('FirebaseAuthException: ${e.code}');
+
+        String errorMsg;
+        switch (e.code) {
+          case 'weak-password':
+            errorMsg = 'Password should be at least 6 characters.';
+            break;
+          case 'invalid-email':
+            errorMsg = 'Invalid email address.';
+            break;
+          default:
+            errorMsg = 'Something went wrong';
         }
 
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(errorMsg)),
         );
       } catch (e) {
         if (!mounted) return;
 
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Unexpected error: $e')),
         );
