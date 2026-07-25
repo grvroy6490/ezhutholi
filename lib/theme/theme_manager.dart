@@ -125,6 +125,19 @@ class ButtonStyleManager {
   }
 }
 
+Color _schemeColor(
+  Map<String, dynamic> scheme,
+  String group,
+  String key, {
+  required Color fallback,
+}) {
+  final hex = scheme[group]?[key];
+  if (hex is String) {
+    return hexToColor(hex);
+  }
+  return fallback;
+}
+
 /// Dynamic Theme Generator
 ThemeData getTheme(bool isDark) {
   final scheme = isDark ? completeColorScheme.dark : completeColorScheme.light;
@@ -132,16 +145,14 @@ ThemeData getTheme(bool isDark) {
   return ThemeData(
     colorScheme: ColorScheme(
       brightness: isDark ? Brightness.dark : Brightness.light,
-      primary: hexToColor(scheme['Primary']['Main']),
-      onPrimary: hexToColor(scheme['Primary']['On Main']),
-      secondary: hexToColor(scheme['Secondary']['Main']),
-      onSecondary: hexToColor(scheme['Secondary']['On Main']),
-      background: hexToColor(scheme['Schemes']['Background']),
-      onBackground: hexToColor(scheme['Schemes']['On Background']),
-      surface: hexToColor(scheme['Schemes']['Surface']),
-      onSurface: hexToColor(scheme['Schemes']['On Surface']),
-      error: hexToColor(scheme['Error']['Main']),
-      onError: hexToColor(scheme['Error']['On Main']),
+      primary: _schemeColor(scheme, 'Primary', 'Main', fallback: const Color(0xFF39608F)),
+      onPrimary: _schemeColor(scheme, 'Primary', 'On Main', fallback: Colors.white),
+      secondary: _schemeColor(scheme, 'Secondary', 'Main', fallback: const Color(0xFF545F70)),
+      onSecondary: _schemeColor(scheme, 'Secondary', 'On Main', fallback: Colors.white),
+      surface: _schemeColor(scheme, 'Schemes', 'Surface', fallback: isDark ? const Color(0xFF111318) : const Color(0xFFF9F9FF)),
+      onSurface: _schemeColor(scheme, 'Schemes', 'On Surface', fallback: isDark ? const Color(0xFFE2E2E9) : const Color(0xFF1A1B20)),
+      error: _schemeColor(scheme, 'Error', 'Main', fallback: isDark ? const Color(0xFFFFB199) : const Color(0xFFC33A10)),
+      onError: _schemeColor(scheme, 'Error', 'On Main', fallback: isDark ? const Color(0xFF601410) : Colors.white),
     ),
   );
 }

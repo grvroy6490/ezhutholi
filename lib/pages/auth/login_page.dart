@@ -3,12 +3,11 @@ import 'package:eluthozhi_v3/theme/theme_manager.dart';
 import 'package:eluthozhi_v3/utility/screenUtility.dart';
 import 'package:eluthozhi_v3/widgets/auth_form_header.dart';
 import 'package:eluthozhi_v3/widgets/custom_buttons.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:eluthozhi_v3/services/firebase_auth_service.dart';
+import 'package:eluthozhi_v3/services/remember_me_store.dart';
 import 'package:eluthozhi_v3/providers/login_state_provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -26,6 +25,23 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _rememberMe = false;
   bool _obscurePassword = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadRememberedCredentials();
+  }
+
+  Future<void> _loadRememberedCredentials() async {
+    final saved = await RememberMeStore.load();
+    if (!mounted) return;
+    setState(() {
+      _rememberMe = saved.rememberMe;
+      if (saved.rememberMe && saved.email.isNotEmpty) {
+        _emailController.text = saved.email;
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -47,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: ScreenUtils.height(context, 0.2),
+                  height: ScreenUtils.height(context, 0.25),
                   child: AuthLogoHeader(),
                 ),
                 const SizedBox(height: 10),
@@ -175,34 +191,36 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(height: 15),
                         SocialLoginButton(
                           onPressed: () async {
-                            User? user = await _authService.signInWithGoogle();
-                            if (user != null) {
-                              if (mounted) {
-                                Provider.of<LoginStateProvider>(
-                                  context,
-                                  listen: false,
-                                ).logIn(user);
-                                Navigator.pushReplacementNamed(
-                                  context,
-                                  '/Home',
-                                );
-                              }
-                            } else {
+                            try {
+                              final user = await _authService.signInWithGoogle();
+                              await RememberMeStore.save(
+                                rememberMe: _rememberMe,
+                                email: user.email ?? '',
+                              );
+                              if (!mounted) return;
+                              Provider.of<LoginStateProvider>(
+                                context,
+                                listen: false,
+                              ).logIn(user);
+                              Navigator.pushReplacementNamed(context, '/Home');
+                            } on AuthCancelledException {
+                              // User dismissed the account picker — no snackbar.
+                            } catch (e) {
+                              if (!mounted) return;
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'Something is wrong, please try again later',
+                                    FirebaseAuthService.messageFor(e),
                                   ),
-                                  duration: Duration(seconds: 2),
                                 ),
                               );
                             }
                           },
                           text: 'Continue with Google',
                           icon: SvgPicture.asset(
-                            'assets/images/google.svg', // Path to your SVG asset
-                            width: 18.0, // Adjust width as needed
-                            height: 18.0, // Adjust height as needed
+                            'assets/images/google.svg',
+                            width: 18.0,
+                            height: 18.0,
                           ),
                         ),
                         const SizedBox(height: 20),
@@ -334,24 +352,26 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> _handleLogin() async {
-    if (_formKey.currentState!.validate()) {
-      User? user = await _authService.signInWithEmailAndPassword(
-        _emailController.text,
+    if (!_formKey.currentState!.validate()) return;
+
+    try {
+      final email = _emailController.text.trim();
+      final user = await _authService.signInWithEmailAndPassword(
+        email,
         _passwordController.text,
       );
-      if (user != null) {
-        if (mounted) {
-          Provider.of<LoginStateProvider>(context, listen: false).logIn(user);
-          Navigator.pushReplacementNamed(context, '/Home');
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Something is wrong, please try again later'),
-            duration: Duration(seconds: 2),
-          ),
-        );
-      }
+      await RememberMeStore.save(
+        rememberMe: _rememberMe,
+        email: email,
+      );
+      if (!mounted) return;
+      Provider.of<LoginStateProvider>(context, listen: false).logIn(user);
+      Navigator.pushReplacementNamed(context, '/Home');
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(FirebaseAuthService.messageFor(e))),
+      );
     }
   }
 }

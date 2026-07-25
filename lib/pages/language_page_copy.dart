@@ -19,7 +19,7 @@ class _LanguagePageState extends State<LanguagePage> {
   final CollectionReference _languagesCollection = FirebaseFirestore.instance.collection('languages');
   final FlutterTts _flutterTts = FlutterTts();
   String _selectedLanguage = 'tamil';
-  Map<String, List<LanguageData>> _cachedLanguages = {};
+  final Map<String, List<LanguageData>> _cachedLanguages = {};
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +131,7 @@ class _LanguagePageState extends State<LanguagePage> {
                 style: const TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
               ),
             const SizedBox(height: 8),
-            ...category.items.map(_buildItemSection).toList(),
+            ...category.items.map(_buildItemSection),
           ],
         ),
       ),

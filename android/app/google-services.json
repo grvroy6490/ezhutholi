@@ -14,55 +14,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "502485495614-70vugv66a9p91um7j2678ceuk67m7r2v.apps.googleusercontent.com",
+          "client_id": "502485495614-ahvr748chh586lqvc3cl2a9p32lddvu2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.copees.eluthozhi",
-            "certificate_hash": "9a01c72a63bc6d764317ec42a8d0277dbae5f407"
+            "certificate_hash": "2fa4f95320537a6ac0ecd60301d4d22df79ebb8c"
           }
         },
         {
-          "client_id": "502485495614-fah131ftd701nhfsh3sd7ldl3aalc6g6.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBpL2tDg_GYb17-dxYIpA8uVLqdOVQPsnM"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "502485495614-fah131ftd701nhfsh3sd7ldl3aalc6g6.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "502485495614-a5ba8k8igif6rl5fb6q5ejqir97p110q.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.mycompany.ezhutholi"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:502485495614:android:89dde4f586b2fc2169c66f",
-        "android_client_info": {
-          "package_name": "com.mycompany.ezhutholi"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "502485495614-abfvhkt0gle921mp2jdfall61jj5d4ig.apps.googleusercontent.com",
+          "client_id": "502485495614-lm3d200rs63j4qig8qdml5lij23q2nsh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.mycompany.ezhutholi",
-            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+            "package_name": "com.copees.eluthozhi",
+            "certificate_hash": "11877b2560a9bb58f1f44a7b767777b9ee75ee14"
           }
         },
         {

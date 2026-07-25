@@ -1,11 +1,13 @@
-import 'package:eluthozhi_v3/constants/color_scheme_data.dart';
-import 'package:eluthozhi_v3/models/color_scheme_model.dart';
+import 'package:eluthozhi_v3/pages/auth/forgot_password_page.dart';
 import 'package:eluthozhi_v3/pages/auth/login_page.dart';
 import 'package:eluthozhi_v3/pages/auth/sign_up_page.dart';
 import 'package:eluthozhi_v3/pages/language_page.dart';
+import 'package:eluthozhi_v3/pages/search_page.dart';
 import 'package:eluthozhi_v3/pages/settings_page.dart';
 import 'package:eluthozhi_v3/pages/splash_page.dart';
+import 'package:eluthozhi_v3/pages/tips_page.dart';
 import 'package:eluthozhi_v3/providers/button_style_provider.dart';
+import 'package:eluthozhi_v3/providers/settings_preferences_provider.dart';
 import 'package:eluthozhi_v3/providers/theme_provider.dart';
 import 'package:eluthozhi_v3/theme/theme_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,6 +38,7 @@ class App extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => ButtonStyleProvider()),
         ChangeNotifierProvider(create: (_) => LoginStateProvider()),
+        ChangeNotifierProvider(create: (_) => SettingsPreferencesProvider()),
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
@@ -49,8 +52,11 @@ class App extends StatelessWidget {
             routes: {
               '/Login': (context) => const LoginPage(),
               '/Signup': (context) => const SignUpPage(),
-              '/Home': (context) => LanguagePage(),
-              '/Settings': (context) => SettingPage(),
+              '/ForgotPassword': (context) => const ForgotPasswordPage(),
+              '/Home': (context) => const LanguagePage(),
+              '/Tips': (context) => const TipsPage(),
+              '/Search': (context) => const SearchPage(),
+              '/Settings': (context) => const SettingPage(),
             },
           );
         },

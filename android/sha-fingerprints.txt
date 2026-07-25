@@ -1,0 +1,27 @@
+# Android signing fingerprints for Firebase Google Sign-In
+# Package: com.copees.eluthozhi
+# Firebase Android app: 1:502485495614:android:f6b990b774bc5ed469c66f
+#
+# These SHA values are registered in Firebase Console.
+# After adding new fingerprints, re-download google-services.json:
+#   firebase apps:sdkconfig ANDROID 1:502485495614:android:f6b990b774bc5ed469c66f --project eluthozhi -o android/app/google-services.json
+
+## Dev (this machine debug keystore)
+# keystore: %USERPROFILE%\.android\debug.keystore
+# alias: androiddebugkey
+SHA1=2F:A4:F9:53:20:53:7A:6A:C0:EC:D6:03:01:D4:D2:2D:F7:9E:BB:8C
+SHA256=96:1D:7A:C8:6D:FE:F7:BD:39:7F:9F:16:5F:67:35:DA:F1:F6:D4:37:8E:7B:D3:D6:87:A9:43:69:CD:A1:87:D9
+
+## Production (android/app/upload-keystore.jks)
+# alias: upload
+# See android/key.properties (gitignored)
+SHA1=11:87:7B:25:60:A9:BB:58:F1:F4:4A:7B:76:77:77:B9:EE:75:EE:14
+SHA256=A3:51:0F:30:55:C8:71:2F:B8:70:38:1D:8A:7F:2A:FE:06:EF:BA:4A:C6:1C:F0:BF:82:DC:D4:7E:79:56:2A:60
+
+## Legacy (already in Firebase, kept for compatibility)
+SHA1=9A:01:C7:2A:63:BC:6D:76:43:17:EC:42:A8:D0:27:7D:BA:E5:F4:07
+
+## iOS
+# Bundle ID: com.example.eluthozhiV3
+# GoogleService-Info.plist: ios/Runner/GoogleService-Info.plist
+# REVERSED_CLIENT_ID URL scheme configured in ios/Runner/Info.plist

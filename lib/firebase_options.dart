@@ -63,7 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '502485495614',
     projectId: 'eluthozhi',
     storageBucket: 'eluthozhi.firebasestorage.app',
-    androidClientId: '502485495614-abfvhkt0gle921mp2jdfall61jj5d4ig.apps.googleusercontent.com',
+    androidClientId: '502485495614-70vugv66a9p91um7j2678ceuk67m7r2v.apps.googleusercontent.com',
     iosClientId: '502485495614-hkhc033bnta7u039fcak1nbpsuhp7im9.apps.googleusercontent.com',
     iosBundleId: 'com.example.eluthozhiV3',
   );
@@ -74,7 +74,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '502485495614',
     projectId: 'eluthozhi',
     storageBucket: 'eluthozhi.firebasestorage.app',
-    androidClientId: '502485495614-abfvhkt0gle921mp2jdfall61jj5d4ig.apps.googleusercontent.com',
+    androidClientId: '502485495614-70vugv66a9p91um7j2678ceuk67m7r2v.apps.googleusercontent.com',
     iosClientId: '502485495614-hkhc033bnta7u039fcak1nbpsuhp7im9.apps.googleusercontent.com',
     iosBundleId: 'com.example.eluthozhiV3',
   );

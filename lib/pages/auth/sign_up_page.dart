@@ -1,6 +1,7 @@
 import 'package:eluthozhi_v3/providers/login_state_provider.dart';
 import 'package:eluthozhi_v3/providers/theme_provider.dart';
 import 'package:eluthozhi_v3/services/firebase_auth_service.dart';
+import 'package:eluthozhi_v3/services/remember_me_store.dart';
 import 'package:eluthozhi_v3/theme/theme_manager.dart';
 import 'package:eluthozhi_v3/utility/screenUtility.dart';
 import 'package:eluthozhi_v3/widgets/auth_form_header.dart';
@@ -8,7 +9,6 @@ import 'package:eluthozhi_v3/widgets/custom_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -26,6 +26,23 @@ class _SignUpPageState extends State<SignUpPage> {
 
   bool _rememberMe = false;
   bool _obscurePassword = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadRememberedCredentials();
+  }
+
+  Future<void> _loadRememberedCredentials() async {
+    final saved = await RememberMeStore.load();
+    if (!mounted) return;
+    setState(() {
+      _rememberMe = saved.rememberMe;
+      if (saved.rememberMe && saved.email.isNotEmpty) {
+        _emailController.text = saved.email;
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -113,25 +130,27 @@ class _SignUpPageState extends State<SignUpPage> {
                         const SizedBox(height: 15),
                         SocialLoginButton(
                           onPressed: () async {
-                            User? user = await _authService.signInWithGoogle();
-                            if (user != null) {
-                              if (mounted) {
-                                Provider.of<LoginStateProvider>(
-                                  context,
-                                  listen: false,
-                                ).logIn(user);
-                                Navigator.pushReplacementNamed(
-                                  context,
-                                  '/Home',
-                                );
-                              }
-                            } else {
+                            try {
+                              final user = await _authService.signInWithGoogle();
+                              await RememberMeStore.save(
+                                rememberMe: _rememberMe,
+                                email: user.email ?? '',
+                              );
+                              if (!mounted) return;
+                              Provider.of<LoginStateProvider>(
+                                context,
+                                listen: false,
+                              ).logIn(user);
+                              Navigator.pushReplacementNamed(context, '/Home');
+                            } on AuthCancelledException {
+                              // User dismissed the account picker — no snackbar.
+                            } catch (e) {
+                              if (!mounted) return;
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'Something is wrong, please try again later',
+                                    FirebaseAuthService.messageFor(e),
                                   ),
-                                  duration: Duration(seconds: 2),
                                 ),
                               );
                             }
@@ -331,74 +350,38 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Future<bool> _isEmailAlreadyRegistered(String email) async {
-    final methods = await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
-    return methods.isNotEmpty;
-  }
-
   Future<void> _handleSignup() async {
-    if (_formKey.currentState!.validate()) {
-      final name = _nameController.text.trim();
-      final email = _emailController.text.trim();
-      final password = _passwordController.text.trim();
+    if (!_formKey.currentState!.validate()) return;
 
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    final name = _nameController.text.trim();
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Checking email availability...')),
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Creating account...')),
+    );
+
+    try {
+      final user = await _authService.signUpWithEmailAndPassword(
+        email: email,
+        password: password,
+        displayName: name,
       );
 
-      try {
-        final alreadyRegistered = await _isEmailAlreadyRegistered(email);
+      await RememberMeStore.save(rememberMe: _rememberMe, email: email);
+      if (!mounted) return;
 
-        if (alreadyRegistered) {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('This email is already registered.')),
-          );
-          return;
-        }
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      Provider.of<LoginStateProvider>(context, listen: false).logIn(user);
+      Navigator.pushReplacementNamed(context, '/Home');
+    } catch (e) {
+      if (!mounted) return;
 
-        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Creating account...')),
-        );
-
-        await _authService.signUpWithEmailAndPassword(email, password);
-
-        if (!mounted) return;
-
-        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-        Navigator.pushReplacementNamed(context, '/Home');
-      } on FirebaseAuthException catch (e) {
-        if (!mounted) return;
-
-        debugPrint('FirebaseAuthException: ${e.code}');
-
-        String errorMsg;
-        switch (e.code) {
-          case 'weak-password':
-            errorMsg = 'Password should be at least 6 characters.';
-            break;
-          case 'invalid-email':
-            errorMsg = 'Invalid email address.';
-            break;
-          default:
-            errorMsg = 'Something went wrong';
-        }
-
-        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(errorMsg)),
-        );
-      } catch (e) {
-        if (!mounted) return;
-
-        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Unexpected error: $e')),
-        );
-      }
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(FirebaseAuthService.messageFor(e))),
+      );
     }
   }
 }

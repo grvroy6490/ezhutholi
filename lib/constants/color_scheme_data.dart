@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class CompleteColorScheme {
   final Map<String, dynamic> light;
@@ -118,27 +117,6 @@ final completeColorScheme = CompleteColorScheme(
         "Contrast": "#110800",
       },
     },
-    "Info": {
-      "Main": "#2b65bf",
-      "On Main": "#ffffff",
-      "Dark": "#002155",
-      "Light": "#d9e8ff",
-      "Contrast": "#000b1d",
-    },
-    "Success": {
-      "Main": "#078e4c",
-      "On Main": "#ffffff",
-      "Dark": "#003006",
-      "Light": "#b0ffd8",
-      "Contrast": "#000f08",
-    },
-    "Warning": {
-      "Main": "#c29514",
-      "On Main": "#ffffff",
-      "Dark": "#936d14",
-      "Light": "#ffeca7",
-      "Contrast": "#866114",
-    },
     "Error": {
       "Main": "#c33a10",
       "On Main": "#ffffff",
@@ -146,48 +124,6 @@ final completeColorScheme = CompleteColorScheme(
       "Light": "#ffd9cd",
       "Contrast": "#170500",
     },
-    "Shades": {
-      "Shade 50": "#e2f1fe",
-      "Shade 100": "#c9d8e5",
-      "Shade 200": "#a9b8c7",
-      "Shade 300": "#8898a8",
-      "Shade 400": "#6c7e8e",
-      "Shade 500": "#516475",
-      "Shade 600": "#3c4f61",
-      "Shade 700": "#233749",
-      "Shade 800": "#0b1f32",
-      "Shade 900": "#000619",
-      "Shade A100": "#c9d8e5",
-      "Shade A200": "#a9b8c7",
-      "Shade A400": "#6c7e8e",
-      "Shade A700": "#233749",
-    },
-    "Text": {
-      "Primary": "#24323fe6",
-      "Secondary": "#24323f99",
-      "Disabled": "#24323f66",
-    },
-    "Primary on Color shade": {
-      "5": "#24323f0d",
-      "10": "#24323f1a",
-      "20": "#24323f33",
-      "40": "#24323f66",
-      "60": "#24323f99",
-      "80": "#24323fcc",
-    },
-    "White Shade": {
-      "5": "#ffffff0d",
-      "10": "#ffffff1a",
-      "20": "#ffffff33",
-      "40": "#ffffff66",
-      "60": "#ffffff99",
-      "80": "#ffffffcc",
-    },
-    "Background": {
-      "Border": "#2d3b484d",
-      "Light Border": "#2d3b481a",
-    },
-    "Common": {"White": "#ffffff", "Black": "#000000"},
   },
   dark: {
     "Primary": {
@@ -299,27 +235,6 @@ final completeColorScheme = CompleteColorScheme(
         "Contrast": "#ffefdf",
       },
     },
-    "Info": {
-      "Main": "#a8caff",
-      "On Main": "#0a377e",
-      "Dark": "#d4e5ff",
-      "Light": "#134da7",
-      "Contrast": "#ebf3ff",
-    },
-    "Success": {
-      "Main": "#6ff6b4",
-      "On Main": "#004b26",
-      "Dark": "#b8ffc1",
-      "Light": "#006d37",
-      "Contrast": "#daffed",
-    },
-    "Warning": {
-      "Main": "#ffd84d",
-      "On Main": "#a37914",
-      "Dark": "#ffeca7",
-      "Light": "#b08614",
-      "Contrast": "#fff6d6",
-    },
     "Error": {
       "Main": "#ffb199",
       "On Main": "#601410",
@@ -327,48 +242,6 @@ final completeColorScheme = CompleteColorScheme(
       "Light": "#a02500",
       "Contrast": "#ffede8",
     },
-    "Shades": {
-      "Shade 50": "#000619",
-      "Shade 100": "#0b1f32",
-      "Shade 200": "#233749",
-      "Shade 300": "#3c4f61",
-      "Shade 400": "#516475",
-      "Shade 500": "#6c7e8e",
-      "Shade 600": "#8898a8",
-      "Shade 700": "#a9b8c7",
-      "Shade 800": "#c9d8e5",
-      "Shade 900": "#e2f1fe",
-      "Shade A100": "#233749",
-      "Shade A200": "#6c7e8e",
-      "Shade A400": "#a9b8c7",
-      "Shade A700": "#c9d8e5",
-    },
-    "Text": {
-      "Primary": "#e6dceaf7",
-      "Secondary": "#dceaf799",
-      "Disabled": "#dceaf766",
-    },
-    "Primary on Color shade": {
-      "5": "#e1effc0d",
-      "10": "#e1effc1a",
-      "20": "#e1effc33",
-      "40": "#e1effc66",
-      "60": "#e1effc99",
-      "80": "#e1effccc",
-    },
-    "White Shade": {
-      "5": "#0000000d",
-      "10": "#0000001a",
-      "20": "#00000033",
-      "40": "#00000066",
-      "60": "#000000cc",
-      "80": "#000000cc",
-    },
-    "Background": {
-      "Border": "#dceaf74d",
-      "Light Border": "#dceaf71a",
-    },
-    "Common": {"White": "#000000", "Black": "#ffffff"},
   },
 );
 

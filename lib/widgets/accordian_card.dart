@@ -28,47 +28,69 @@ class _AccordionCardState extends State<AccordionCard> {
 
   @override
   Widget build(BuildContext context) {
+    final surface = getFigmaColor(context, 'Surface', 'Surface Container');
+    final header = getFigmaColor(context, 'Surface', 'Surface Container High');
+    final onSurface = getFigmaColor(context, 'Primary', 'Dark');
+    final muted = getFigmaColor(context, 'Secondary', 'Main');
+
     return ClipRRect(
-      borderRadius: BorderRadius.circular(15),
+      borderRadius: BorderRadius.circular(16),
       child: Card(
         elevation: 0,
         margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
-        color: getFigmaColor(context, 'Surface', 'Surface Container'),
+        color: surface,
         child: Column(
           children: [
             InkWell(
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
-              onTap: () {
-                setState(() {
-                  isExpanded = !isExpanded;
-                });
-              },
+              onTap: () => setState(() => isExpanded = !isExpanded),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                 width: double.infinity,
+                color: header,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      widget.title,
-                      style: const TextStyle(fontWeight: FontWeight.w600),
+                    Expanded(
+                      child: Text(
+                        widget.title,
+                        style: AppTypography.titleMedium().copyWith(
+                          color: onSurface,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
-                    Icon(isExpanded ? Icons.expand_less : Icons.expand_more),
+                    Container(
+                      width: 28,
+                      height: 28,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: muted.withValues(alpha: 0.5)),
+                      ),
+                      child: Icon(
+                        isExpanded ? Icons.remove : Icons.add,
+                        size: 18,
+                        color: muted,
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
             AnimatedCrossFade(
-              duration: const Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 250),
               crossFadeState: isExpanded
                   ? CrossFadeState.showFirst
                   : CrossFadeState.showSecond,
-              firstChild: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              firstChild: Container(
+                width: double.infinity,
+                color: surface,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 child: widget.content,
               ),
-              secondChild: const SizedBox.shrink(),
+              secondChild: const SizedBox(width: double.infinity),
             ),
           ],
         ),

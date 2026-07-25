@@ -1,11 +1,9 @@
 import 'package:eluthozhi_v3/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 
 /// **Custom Submit Button**
 class CustomSubmitButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final String text;
 
   const CustomSubmitButton({

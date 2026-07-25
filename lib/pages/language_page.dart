@@ -1,15 +1,13 @@
 // Full Fixed Updated Version (with Correct Per-Category Color Rotation)
 
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:eluthozhi_v3/providers/theme_provider.dart';
+import 'package:eluthozhi_v3/providers/settings_preferences_provider.dart';
 import 'package:eluthozhi_v3/theme/theme_manager.dart';
 import 'package:eluthozhi_v3/theme/button_palettes.dart';
-import 'package:eluthozhi_v3/utility/screenUtility.dart';
 import 'package:eluthozhi_v3/widgets/bottom_nav_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eluthozhi_v3/providers/login_state_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:eluthozhi_v3/models/language_data.dart';
 import 'package:shimmer/shimmer.dart';
@@ -29,14 +27,8 @@ class _LanguagePageState extends State<LanguagePage> {
   final _selectedLanguage = 'tamil';
   final _selectedPalette = 'default';
 
-  @override
-  void initState() {
-    super.initState();
-    ScreenUtils.debugPrintSharedPreferences(); // prints all saved SharedPreferences to console
-  }
-
   final ScrollController _scrollController = ScrollController();
-  Map<String, List<LanguageData>> _cachedLanguages = {};
+  final Map<String, List<LanguageData>> _cachedLanguages = {};
   List<GlobalKey> _cardKeys = [];
   Future<void> _scrollToCard(int index) async {
     if (_cardKeys.length > index) {
@@ -96,7 +88,7 @@ class _LanguagePageState extends State<LanguagePage> {
                       child: Column(
                         children: List.generate(categories.length, (index) {
                           final category = categories[index];
-                          return Container(
+                          return SizedBox(
                             width: double.infinity,
                             key: _cardKeys[index],
                             child: _buildCategoryCard(category, isDark, index),
@@ -112,6 +104,8 @@ class _LanguagePageState extends State<LanguagePage> {
 
   Widget _buildHorizontalCategoryBar() {
     final isDark = Provider.of<ThemeProvider>(context).isDark;
+    final filterStyle =
+        Provider.of<SettingsPreferencesProvider>(context).filterStyle;
 
     return SizedBox(
       height: 50,
@@ -135,6 +129,31 @@ class _LanguagePageState extends State<LanguagePage> {
                   categoryIndex: index,
                   isDarkMode: isDark,
                 );
+
+                if (filterStyle == FilterStyle.colorDots) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 12),
+                    child: Tooltip(
+                      message: categories[index].title.split(' ')[0],
+                      child: InkWell(
+                        onTap: () => _scrollToCard(index),
+                        customBorder: const CircleBorder(),
+                        child: Container(
+                          width: 28,
+                          height: 28,
+                          decoration: BoxDecoration(
+                            color: palette.backgroundColor,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: palette.borderColor,
+                              width: 2,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }
 
                 return Padding(
                   padding: const EdgeInsets.only(right: 8),
@@ -188,12 +207,6 @@ class _LanguagePageState extends State<LanguagePage> {
   }
 
   Widget _buildCategoryCard(LanguageData category, bool isDark, int mainIndex) {
-    final palette = ThemedButtonPalettes.getMainPalette(
-      themeName: _selectedPalette,
-      categoryIndex: mainIndex,
-      isDarkMode: isDark,
-    );
-
     return Card(
       margin: const EdgeInsets.all(0),
       shape: const RoundedRectangleBorder(
@@ -251,7 +264,7 @@ class _LanguagePageState extends State<LanguagePage> {
             );
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (item.subTitle != null)
           Padding(
@@ -262,12 +275,41 @@ class _LanguagePageState extends State<LanguagePage> {
             ),
           ),
         const SizedBox(height: 4),
-        Wrap(
-          spacing: 10,
-          runSpacing: 10,
-          children:
-              item.subItems.map((letter) {
-                return GestureDetector(
+        _buildLetterGrid(item.subItems, palette),
+      ],
+    );
+  }
+
+  /// 4-unit grid: [Letter.column] is the span (1 = 1/4 width, 2 = 1/2 width).
+  /// Tiles fill the available width with equal gaps on every side.
+  Widget _buildLetterGrid(List<Letter> letters, ButtonPalette palette) {
+    const crossAxisCount = 4;
+    const spacing = 10.0;
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final cellWidth =
+            (constraints.maxWidth - spacing * (crossAxisCount - 1)) /
+            crossAxisCount;
+
+        return Wrap(
+          spacing: spacing,
+          runSpacing: spacing,
+          children: letters.map((letter) {
+            final span = letter.column.clamp(1, crossAxisCount);
+            final tileWidth = cellWidth * span + spacing * (span - 1);
+
+            return SizedBox(
+              width: tileWidth,
+              height: cellWidth,
+              child: Material(
+                color: palette.backgroundColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(color: palette.borderColor),
+                ),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(8),
                   onTap: () async {
                     try {
                       await _audioPlayer.play(
@@ -277,38 +319,42 @@ class _LanguagePageState extends State<LanguagePage> {
                       debugPrint('Audio error: $e');
                     }
                   },
-                  child: Container(
-                    width:
-                        letter.column == 1
-                            ? ScreenUtils.width(context, 0.2)
-                            : ScreenUtils.width(context, 0.5) - 30,
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: palette.backgroundColor,
-                      border: Border.all(color: palette.borderColor),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          letter.name,
-                          style: Theme.of(context).textTheme.displaySmall
-                              ?.copyWith(color: palette.textColor),
+                        Flexible(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              letter.name,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displaySmall
+                                  ?.copyWith(color: palette.textColor),
+                            ),
+                          ),
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 4),
                         Text(
-                          'Ak',
-                          style: Theme.of(context).textTheme.titleMedium
+                          letter.english.isNotEmpty ? letter.english : '—',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
                               ?.copyWith(color: palette.textColor),
                         ),
                       ],
                     ),
                   ),
-                );
-              }).toList(),
-        ),
-      ],
+                ),
+              ),
+            );
+          }).toList(),
+        );
+      },
     );
   }
 }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:eluthozhi_v3/services/firebase_auth_service.dart';
 
 class LoginStateProvider with ChangeNotifier {
   User? _user;
-  bool _isLoading = true; // Add loading to handle initial auth state checking
+  bool _isLoading = true;
+
+  final FirebaseAuthService _authService = FirebaseAuthService();
 
   LoginStateProvider() {
     _initAuthListener();
@@ -12,10 +15,10 @@ class LoginStateProvider with ChangeNotifier {
 
   bool get isLoggedIn => _user != null;
   User? get user => _user;
-  bool get isLoading => _isLoading; // Expose loading flag
+  bool get isLoading => _isLoading;
 
   void _initAuthListener() {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) async {
+    _authService.authStateChanges.listen((User? user) async {
       _user = user;
       _isLoading = false;
       await _updatePrefs(user != null);
@@ -35,6 +38,7 @@ class LoginStateProvider with ChangeNotifier {
   }
 
   Future<void> logOut() async {
+    await _authService.signOut();
     _user = null;
     await _updatePrefs(false);
     notifyListeners();
